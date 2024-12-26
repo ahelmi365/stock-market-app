@@ -5,7 +5,7 @@ const SplashScreen = () => {
      
         <img src={nasdaqLogo} alt="Nasdaq Logo" style={{ width: "300px", height:"100%" }} />
      
-      <p className="mt-auto text-dark fw-bold">Devloped By: Ali Helmi</p>
+      <p className="mt-auto text-dark fw-bold">Developed By: Ali Helmi</p>
     </div>
   );
 };
