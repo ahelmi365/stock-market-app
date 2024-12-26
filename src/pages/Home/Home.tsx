@@ -1,9 +1,11 @@
+import ErrorBoundry from "@components/ErrorBoundery/ErrorBoundery";
+import Tickers from "@components/Tickers/Tickers";
 
 const Home = () => {
   return (
-    <div>
-      <h1>home</h1>
-    </div>
+    <ErrorBoundry>
+      <Tickers />
+    </ErrorBoundry>
   );
 };
 
