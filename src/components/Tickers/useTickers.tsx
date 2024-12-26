@@ -3,7 +3,7 @@ const apiKey = import.meta.env.VITE_API_KEY;
 
 import getTickers from "api/getTickers";
 const useTickers = () => {
-  const url = `https://api.polygon.io/v3/reference/tickers?active=true&limit=9&apiKey=${apiKey}2`;
+  const url = `https://api.polygon.io/v3/reference/tickers?active=true&limit=9&apiKey=${apiKey}`;
 
   const { isPending, error, data } = useQuery({
     queryKey: ["tickers", url],
