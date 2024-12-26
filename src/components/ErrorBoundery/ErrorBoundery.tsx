@@ -22,15 +22,17 @@ class ErrorBoundry extends Component<IErrorBoundryProps, IErrorBoundryState> {
   }
 
   render() {
-    console.log(this.state.error)
     if (this.state.hasError) {
       return (
         <div className="error-boundary">
-            <h2>Oops! Something went wrong.</h2>
-          <p>
-            There is an error. Please refresh the page and try again. If the
-            error persists, please contact the support.
-          </p>
+          <h2>Oops! Something went wrong.</h2>
+
+          {this.state.error && (
+            <div>
+              <h3>Error Details:</h3>
+              <p>{(this.state.error as Error).message}</p>
+            </div>
+          )}
         </div>
       );
     }
