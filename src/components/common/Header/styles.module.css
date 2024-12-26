@@ -1,0 +1,39 @@
+.headerContainer {
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerLogo {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.headerLogo h1 {
+  margin: 0;
+}
+
+.headerLogo h1 span {
+  /* margin-right: 5px; */
+}
+
+.eLogo {
+  display: inline-block;
+  font-size: 1.5rem;
+  animation: scale 3s linear infinite;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: rotate(1);
+  }
+}
