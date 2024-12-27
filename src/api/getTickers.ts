@@ -1,12 +1,4 @@
-import { ITicker } from "@customTypes/ticker";
-
-interface ITickersResponse {
-  results: ITicker[];
-  status: string;
-  count: number;
-  next_url: string;
-  request_id: string;
-}
+import { ITickersResponse } from "@customTypes/ticker";
 
 const getTickers = async (url: string): Promise<ITickersResponse> => {
   const response = await fetch(url);
