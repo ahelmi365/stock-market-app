@@ -30,10 +30,9 @@ const useTickers = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log("Scroll event triggered");
       if (
         window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 2
+        document.documentElement.scrollHeight - 20
       ) {
         console.log("Bottom of the page reached");
         if (hasNextPage && !isFetchingNextPage) {
@@ -43,7 +42,19 @@ const useTickers = () => {
       }
     };
 
+    const checkContentHeight = () => {
+      if (document.documentElement.scrollHeight <= window.innerHeight) {
+        console.log("Content height is less than or equal to viewport height");
+        if (hasNextPage && !isFetchingNextPage) {
+          console.log("Fetching next page due to insufficient content height");
+          fetchNextPage();
+        }
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
+    checkContentHeight();
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
