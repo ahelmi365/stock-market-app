@@ -12,6 +12,12 @@ const useTickers = () => {
     return response;
   };
 
+  const loadMoreTickers = () => {
+    if (hasNextPage && !isFetchingNextPage) {
+      console.log("Fetching next page");
+      fetchNextPage();
+    }
+  };
   const {
     data,
     error,
@@ -35,26 +41,20 @@ const useTickers = () => {
         document.documentElement.scrollHeight - 20
       ) {
         console.log("Bottom of the page reached");
-        if (hasNextPage && !isFetchingNextPage) {
-          console.log("Fetching next page");
-          fetchNextPage();
-        }
+        loadMoreTickers();
       }
     };
 
+    // load more tickers if content height is less than or equal to viewport height
     const checkContentHeight = () => {
       if (document.documentElement.scrollHeight <= window.innerHeight) {
-        console.log("Content height is less than or equal to viewport height");
-        if (hasNextPage && !isFetchingNextPage) {
-          console.log("Fetching next page due to insufficient content height");
-          fetchNextPage();
-        }
+        loadMoreTickers();
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     checkContentHeight();
-    
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
