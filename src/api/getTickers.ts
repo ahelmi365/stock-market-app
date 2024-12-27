@@ -10,8 +10,6 @@ interface ITickersResponse {
 
 const getTickers = async (url: string): Promise<ITickersResponse> => {
   const response = await fetch(url);
-  const retryAfter = response.headers.get("Retry-After");
-  console.log({retryAfter})
   if (response.ok) {
     const data = await response.json();
     return data;
