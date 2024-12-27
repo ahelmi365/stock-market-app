@@ -5,6 +5,7 @@ interface ITickersResponse {
   status: string;
   count: number;
   next_url: string;
+  request_id: string;
 }
 
 const getTickers = async (url: string): Promise<ITickersResponse> => {
