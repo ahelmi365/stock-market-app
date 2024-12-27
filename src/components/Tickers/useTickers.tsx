@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { setTickers } from "@store/tickers/tickersSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import getTickers from "api/getTickers";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const MaxLimit = 10;
