@@ -1,12 +1,13 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import getTickers from "api/getTickers";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const MaxLimit = 10;
 const initialUrl = `https://api.polygon.io/v3/reference/tickers?active=true&limit=${MaxLimit}&apiKey=${apiKey}`;
 
 const useTickers = () => {
+  const [requestUrl, setRequestUrl] = useState(initialUrl);
   const fetchTickers = async ({ pageParam = initialUrl }) => {
     const response = await getTickers(pageParam);
     return response;
@@ -42,6 +43,7 @@ const useTickers = () => {
       ) {
         console.log("Bottom of the page reached");
         loadMoreTickers();
+        // setRequestUrl(data!.pages[data!.pages.length - 1].next_url);
       }
     };
 
@@ -57,9 +59,9 @@ const useTickers = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-
   return {
-    data,
+    tickers: data?.pages.flatMap((page) => page.results) || [],
+    // results: data?.pages.map((page) => page.results).flat() || [], // the same as using flatMap()
     error,
     isFetchingNextPage,
     status,
