@@ -1,3 +1,5 @@
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { setTickers } from "@store/tickers/tickersSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import getTickers from "api/getTickers";
 import { useEffect, useState } from "react";
@@ -7,15 +9,39 @@ const MaxLimit = 10;
 const initialUrl = `https://api.polygon.io/v3/reference/tickers?active=true&limit=${MaxLimit}&apiKey=${apiKey}`;
 
 const useTickers = () => {
-  const [requestUrl, setRequestUrl] = useState(initialUrl);
+  const dispatch = useAppDispatch();
+  const tickersFromTheStore = useAppSelector(
+    (state) => state.tickers.responses
+  );
+
+  const storeHasTicker = (requestId: string) => {
+    const results = tickersFromTheStore.map((ticker) => {
+      if (ticker[requestId]) {
+        return true;
+      }
+    });
+    return results.some((result) => result === true);
+  };
   const fetchTickers = async ({ pageParam = initialUrl }) => {
-    const response = await getTickers(pageParam);
-    return response;
+    // check if there is a response in the store with this url or not
+    if (storeHasTicker(pageParam)) {
+      console.log("Store already has this ticker");
+      const targetResponse = tickersFromTheStore.filter(
+        (response) => response[pageParam] != undefined
+      );
+      return targetResponse[0][pageParam];
+    } else {
+      // call api to get new response
+      console.log("get new ticker and add it to the store")
+      const response = await getTickers(pageParam);
+      dispatch(setTickers({ response, requestUrl: pageParam }));
+      return response;
+    }
   };
 
   const loadMoreTickers = () => {
     if (hasNextPage && !isFetchingNextPage) {
-      console.log("Fetching next page");
+      // console.log("Fetching next page");
       fetchNextPage();
     }
   };
@@ -41,9 +67,8 @@ const useTickers = () => {
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 20
       ) {
-        console.log("Bottom of the page reached");
+        // console.log("Bottom of the page reached");
         loadMoreTickers();
-        // setRequestUrl(data!.pages[data!.pages.length - 1].next_url);
       }
     };
 
@@ -60,6 +85,7 @@ const useTickers = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
   return {
+    // tickers: tickersFromTheStore || [],
     tickers: data?.pages.flatMap((page) => page.results) || [],
     // results: data?.pages.map((page) => page.results).flat() || [], // the same as using flatMap()
     error,
