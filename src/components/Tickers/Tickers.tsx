@@ -6,7 +6,7 @@ import Loading from "@components/common/Loading/Loading";
 
 const Tickers = () => {
   const { tickers, error, isFetchingNextPage, status } = useTickers();
-  if (status === "pending") return <div>Loading...</div>;
+  if (status === "pending") return <Loading/>;
   if (status === "error") throw error;
 
   const renderedTickers = tickers.map((ticker) => (

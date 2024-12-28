@@ -7,7 +7,7 @@ import Loading from "@components/common/Loading/Loading";
 const TickersSearchResults = () => {
   const { searchTickersResults, error, isFetchingNextPage, status } =
     useTickersSearchResults();
-  if (status === "pending") return <div>Loading...</div>;
+  if (status === "pending") return <Loading/>;
   if (status === "error") throw error;
 
   const renderedTickers = searchTickersResults.map((ticker) => (
