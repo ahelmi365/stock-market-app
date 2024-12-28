@@ -2,6 +2,7 @@ import { sliceLongText } from "utils";
 import useTickers from "./useTickers";
 
 import Card from "@components/common/Card/Card";
+import Loading from "@components/common/Loading/Loading";
 
 const Tickers = () => {
   const { tickers, error, isFetchingNextPage, status } = useTickers();
@@ -22,7 +23,7 @@ const Tickers = () => {
     <div className="row g-3">
       <h5>All Tickers</h5>
       {renderedTickers}
-      {isFetchingNextPage && <div>Loading more...</div>}
+      {isFetchingNextPage && <Loading/>}
     </div>
   );
 };
