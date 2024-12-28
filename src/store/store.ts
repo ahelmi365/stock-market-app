@@ -13,19 +13,26 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 // reducer
-
 import tickersSlice from "./tickers/tickersSlice.ts";
+import searchTickersSlice from "./searchTickers/searchTickersSlice.ts";
 
-//  persist config
-const cartPersistConfig = {
-  key: "stock-market-app",
+// Persist configurations for each slice
+const tickersPersistConfig = {
+  key: "tickers",
   storage,
-  whiteList: ["tickers"],
 };
 
+const searchTickersPersistConfig = {
+  key: "searchTickers",
+  storage,
+};
+
+// Combine reducers with persist configurations
 const rootReducer = combineReducers({
-  tickers: persistReducer(cartPersistConfig, tickersSlice),
+  tickers: persistReducer(tickersPersistConfig, tickersSlice),
+  searchTickers: persistReducer(searchTickersPersistConfig, searchTickersSlice),
 });
+
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
