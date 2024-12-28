@@ -12,7 +12,7 @@ import { PersistGate } from "redux-persist/integration/react";
 // boostrap
 import "bootstrap/dist/css/bootstrap.min.css";
 // css
-// import "@styles/global.css";
+import "@styles/global.css";
 import AppRouter from "@routes/AppRouter";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
