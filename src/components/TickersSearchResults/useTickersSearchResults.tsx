@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { setSearchTickersResult } from "@store/searchTickers/searchTickersSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import getTickers from "api/getTickers";
+import { useEffect } from "react";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const MaxLimit = 10;
@@ -11,7 +12,6 @@ const useTickersSearchResults = () => {
   const searchTextFromTheStore = useAppSelector(
     (state) => state.searchTickers.searchText
   );
-  console.log({searchTextFromTheStore})
   const initialUrl = `https://api.polygon.io/v3/reference/tickers?search=${searchTextFromTheStore}&active=true&limit=10&apiKey=${apiKey}`;
   const searchTickersResultsFromTheStore = useAppSelector(
     (state) => state.searchTickers.responses
@@ -65,33 +65,32 @@ const useTickersSearchResults = () => {
       lastPage?.next_url + `&limit=${MaxLimit}&apiKey=${apiKey}` || undefined,
   });
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (
-  //       window.innerHeight + window.scrollY >=
-  //       document.documentElement.scrollHeight - 20
-  //     ) {
-  //       // console.log("Bottom of the page reached");
-  //       loadMoreTickers();
-  //     }
-  //   };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 20
+      ) {
+        // console.log("Bottom of the page reached");
+        loadMoreTickers();
+      }
+    };
 
-  //   // load more tickers if content height is less than or equal to viewport height
-  //   const checkContentHeight = () => {
-  //     if (document.documentElement.scrollHeight <= window.innerHeight) {
-  //       loadMoreTickers();
-  //     }
-  //   };
+    // load more tickers if content height is less than or equal to viewport height
+    const checkContentHeight = () => {
+      if (document.documentElement.scrollHeight <= window.innerHeight) {
+        loadMoreTickers();
+      }
+    };
 
-  //   // window.addEventListener("scroll", handleScroll);
-  //   // checkContentHeight();
+    window.addEventListener("scroll", handleScroll);
+    checkContentHeight();
 
-  //   // return () => window.removeEventListener("scroll", handleScroll);
-  // }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
   return {
-    // tickers: tickersFromTheStore || [],
     searchTickersResults: data?.pages.flatMap((page) => page?.results) || [],
-    // results: data?.pages.map((page) => page.results).flat() || [], // the same as using flatMap()
     error,
     isFetchingNextPage,
     status,
