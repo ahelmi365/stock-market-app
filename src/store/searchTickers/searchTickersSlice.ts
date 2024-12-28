@@ -28,16 +28,8 @@ const searchTickersSlice = createSlice({
       state,
       action: PayloadAction<ISetSearchTickersPayload>
     ) {
-      const { results, status, count, next_url, request_id } =
-        action.payload.response;
       state.responses.push({
-        [action.payload.searchText]: {
-          results,
-          status,
-          count,
-          next_url,
-          request_id,
-        },
+        [action.payload.searchText]: { ...action.payload.response },
       });
     },
   },
