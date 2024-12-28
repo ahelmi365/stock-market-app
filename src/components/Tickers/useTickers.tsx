@@ -34,7 +34,10 @@ const useTickers = () => {
       // call api to get new response
       console.log("get new ticker and add it to the store");
       const response = await getTickers(pageParam);
-      dispatch(setTickers({ response, requestUrl: pageParam }));
+      // cashing only the first 100 ticker (10 respones)
+      if (tickersFromTheStore.length < 11) {
+        dispatch(setTickers({ response, requestUrl: pageParam }));
+      }
       return response;
     }
   };
