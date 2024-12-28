@@ -5,4 +5,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), , tsconfigPaths()],
+  test: {
+    environment: "happy-dom",
+    coverage: {
+      reporter: ["text", "json", "html"], // this object
+    },
+  },
 })
