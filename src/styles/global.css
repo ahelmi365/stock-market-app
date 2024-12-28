@@ -16,3 +16,11 @@
 .notFound p {
   font-size: 50px;
 }
+
+.card {
+  transition: all 0.3s ease-in-out;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border: 1px solid #293035;
+}
