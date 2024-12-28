@@ -19,16 +19,8 @@ const tickersSlice = createSlice({
   initialState,
   reducers: {
     setTickers(state, action: PayloadAction<ISetTickersPayload>) {
-      const { results, status, count, next_url, request_id } =
-        action.payload.response;
       state.responses.push({
-        [action.payload.requestUrl]: {
-          results,
-          status,
-          count,
-          next_url,
-          request_id,
-        },
+        [action.payload.requestUrl]: { ...action.payload.response },
       });
     },
   },
