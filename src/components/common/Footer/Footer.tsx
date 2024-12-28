@@ -3,9 +3,9 @@ const { footerContainer } = styles;
 const thisYear = new Date().getFullYear();
 const Footer = () => {
   return (
-    <div className={footerContainer}>
+    <footer className={footerContainer}>
       © {thisYear} Stock Market. All rights reserved.
-    </div>
+    </footer>
   );
 };
 
