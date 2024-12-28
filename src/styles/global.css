@@ -1,19 +1,18 @@
-.active{
-    text-decoration: underline;
+.active {
+  text-decoration: underline;
 }
 
-
 .notFound {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .notFound h1 {
-    font-size: 130px;
-  }
-  .notFound p {
-    font-size: 50px;
-  }
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFound h1 {
+  font-size: 130px;
+}
+.notFound p {
+  font-size: 50px;
+}
