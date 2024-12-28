@@ -4,7 +4,8 @@ import { Header, Footer } from "@components/common";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SplashScreen from "@components/SplashScreen/SplashScreen";
-const { container, wrapper } = styles;
+import BackToTop from "@components/common/Card/BackToTop/BackToTop";
+const { container, wrapper, backToTopContainer } = styles;
 const MainLayout = () => {
   const [loading, setLoading] = useState(true);
 
@@ -21,13 +22,19 @@ const MainLayout = () => {
     return <SplashScreen />;
   }
   return (
-    <Container className={container}>
-      <Header />
-      <div className={`${wrapper} my-4`}>
-        <Outlet />
+    <>
+      <div className={backToTopContainer}>
+        <BackToTop />
       </div>
-      <Footer />
-    </Container>
+      <Container className={container}>
+        <Header />
+
+        <main className={`${wrapper} my-4`}>
+          <Outlet />
+        </main>
+        <Footer />
+      </Container>
+    </>
   );
 };
 
