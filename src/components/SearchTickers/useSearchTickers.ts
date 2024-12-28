@@ -1,27 +1,14 @@
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { setSearchText } from "@store/searchTickers/searchTickersSlice";
 import { useCallback, useState } from "react";
+import { debounce } from "utils";
 
 const useSearchTickers = () => {
-  const searchTextFromStore = useAppSelector(state=>state.searchTickers.searchText)
-  const [query, setQuery] = useState(searchTextFromStore||"");
+  const searchTextFromStore = useAppSelector(
+    (state) => state.searchTickers.searchText
+  );
+  const [query, setQuery] = useState(searchTextFromStore || "");
   const dispatch = useAppDispatch();
-
-  // Custom debounce function
-  function debounce<T extends (...args: string[]) => void>(
-    func: T,
-    delay: number
-  ): (...args: Parameters<T>) => void {
-    let timeoutId: NodeJS.Timeout;
-    return function (...args: Parameters<T>) {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  }
 
   // Debounced search function
   const debouncedSearch = useCallback(
