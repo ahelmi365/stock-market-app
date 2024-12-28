@@ -19,6 +19,7 @@ const Tickers = () => {
 
   return (
     <div className="row g-3">
+      <h5>All Tickers</h5>
       {renderedTickers}
       {isFetchingNextPage && <div>Loading more...</div>}
     </div>
