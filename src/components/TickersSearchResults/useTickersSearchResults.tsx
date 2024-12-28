@@ -12,7 +12,7 @@ const useTickersSearchResults = () => {
     (state) => state.searchTickers.searchText
   );
   console.log({searchTextFromTheStore})
-  const initialUrl = `https://api.polygon.io/v3/reference/tickers?search=${searchTextFromTheStore}&active=true&limit=100&apiKey=${apiKey}`;
+  const initialUrl = `https://api.polygon.io/v3/reference/tickers?search=${searchTextFromTheStore}&active=true&limit=10&apiKey=${apiKey}`;
   const searchTickersResultsFromTheStore = useAppSelector(
     (state) => state.searchTickers.responses
   );
