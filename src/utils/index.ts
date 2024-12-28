@@ -13,3 +13,11 @@ export function debounce<T extends (...args: string[]) => void>(
     }, delay);
   };
 }
+
+export const sliceLongText = (text: string) => {
+  if (text.length > 40) {
+    const slicedText = text.slice(0, 40);
+    return slicedText + "...";
+  }
+  return text;
+};
