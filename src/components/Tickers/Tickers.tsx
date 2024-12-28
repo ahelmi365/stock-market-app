@@ -1,3 +1,4 @@
+import { sliceLongText } from "utils";
 import useTickers from "./useTickers";
 
 import Card from "@components/common/Card/Card";
@@ -9,7 +10,7 @@ const Tickers = () => {
 
   const renderedTickers = tickers.map((ticker) => (
     <div className="col-sm-12 col-md-6 col-lg-4" key={ticker.ticker}>
-      <Card title={ticker.ticker} text={ticker.name}>
+      <Card title={ticker.ticker} text={sliceLongText(ticker?.name!)}>
         {/* <p className="nore-info">
           {ticker.currency_symbol} {ticker.base_currency_symbol}
         </p> */}
