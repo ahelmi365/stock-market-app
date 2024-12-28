@@ -3,9 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ITickerState {
   responses: { [key: string]: ITickersResponse }[];
-  requestUrl: string;
 }
-interface SetTickersPayload {
+interface ISetTickersPayload {
   response: ITickersResponse;
   requestUrl: string;
 }
@@ -13,14 +12,13 @@ const initialState: ITickerState = {
   responses: [
     { "": { results: [], status: "", count: 0, next_url: "", request_id: "" } },
   ],
-  requestUrl: "",
 };
 
 const tickersSlice = createSlice({
   name: "tickers",
   initialState,
   reducers: {
-    setTickers(state, action: PayloadAction<SetTickersPayload>) {
+    setTickers(state, action: PayloadAction<ISetTickersPayload>) {
       const { results, status, count, next_url, request_id } =
         action.payload.response;
       state.responses.push({
