@@ -1,9 +1,10 @@
-import { useAppDispatch } from "@store/hooks";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { setSearchText } from "@store/searchTickers/searchTickersSlice";
 import { useCallback, useState } from "react";
 
 const useSearchTickers = () => {
-  const [query, setQuery] = useState("");
+  const searchTextFromStore = useAppSelector(state=>state.searchTickers.searchText)
+  const [query, setQuery] = useState(searchTextFromStore||"");
   const dispatch = useAppDispatch();
 
   // Custom debounce function
@@ -25,16 +26,23 @@ const useSearchTickers = () => {
   // Debounced search function
   const debouncedSearch = useCallback(
     debounce((searchTerm) => {
-      // console.log("You are searching about", searchTerm);
-      dispatch(setSearchText(searchTerm));
-    }, 700),
+      const trimmedSearchTerm = searchTerm.trim();
+      if (trimmedSearchTerm) {
+        dispatch(setSearchText(trimmedSearchTerm));
+      }
+    }, 800),
     []
   );
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
+    const trimmedValue = value.trim();
     setQuery(value);
-    debouncedSearch(value);
+    if (trimmedValue) {
+      debouncedSearch(trimmedValue);
+    } else {
+      dispatch(setSearchText(""));
+    }
   };
 
   return { query, handleInputChange };
