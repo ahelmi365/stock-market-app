@@ -32,7 +32,7 @@ const useTickers = () => {
       return targetResponse[0][pageParam];
     } else {
       // call api to get new response
-      console.log("get new ticker and add it to the store")
+      console.log("get new ticker and add it to the store");
       const response = await getTickers(pageParam);
       dispatch(setTickers({ response, requestUrl: pageParam }));
       return response;
@@ -58,14 +58,17 @@ const useTickers = () => {
     queryKey: ["tickers", initialUrl],
     queryFn: fetchTickers,
     getNextPageParam: (lastPage) =>
-      lastPage.next_url + `&limit=${MaxLimit}&apiKey=${apiKey}` || undefined,
+      lastPage?.next_url
+        ? lastPage?.next_url + `&limit=${MaxLimit}&apiKey=${apiKey}`
+        : undefined,
   });
 
   useEffect(() => {
     const handleScroll = () => {
       if (
+        hasNextPage &&
         window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 20
+          document.documentElement.scrollHeight - 20
       ) {
         // console.log("Bottom of the page reached");
         loadMoreTickers();
@@ -74,7 +77,10 @@ const useTickers = () => {
 
     // load more tickers if content height is less than or equal to viewport height
     const checkContentHeight = () => {
-      if (document.documentElement.scrollHeight <= window.innerHeight) {
+      if (
+        hasNextPage &&
+        document.documentElement.scrollHeight <= window.innerHeight
+      ) {
         loadMoreTickers();
       }
     };
