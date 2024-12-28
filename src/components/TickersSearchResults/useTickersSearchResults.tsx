@@ -43,7 +43,10 @@ const useTickersSearchResults = () => {
       // call api to get new response
       console.log("get new ticker and add it to the store");
       const response = await getTickers(pageParam);
-      dispatch(setSearchTickersResult({ response, searchText: pageParam }));
+      // cashing only the first 100 ticker (10 respones)
+      if (searchTickersResultsFromTheStore.length < 11) {
+        dispatch(setSearchTickersResult({ response, searchText: pageParam }));
+      }
       return response;
     }
   };
@@ -74,9 +77,10 @@ const useTickersSearchResults = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (hasNextPage &&
+      if (
+        hasNextPage &&
         window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 20
+          document.documentElement.scrollHeight - 20
       ) {
         // console.log("Bottom of the page reached");
         loadMoreTickers();
