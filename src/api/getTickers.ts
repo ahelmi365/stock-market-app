@@ -9,7 +9,7 @@ const getTickers = async (url: string): Promise<ITickersResponse> => {
 
     if (response.status === 429) {
       console.log("Excced rate limits");
-      await new Promise((resolve) => setTimeout(resolve, delay + 10000));
+      await new Promise((resolve) => setTimeout(resolve, delay));
     } else {
       return response.json(); // Successful response
     }
