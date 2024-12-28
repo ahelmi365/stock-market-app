@@ -2,6 +2,7 @@ import { sliceLongText } from "utils";
 import useTickersSearchResults from "./useTickersSearchResults";
 
 import Card from "@components/common/Card/Card";
+import Loading from "@components/common/Loading/Loading";
 
 const TickersSearchResults = () => {
   const { searchTickersResults, error, isFetchingNextPage, status } =
@@ -24,7 +25,7 @@ const TickersSearchResults = () => {
       <h5>Search Results</h5>
 
       {searchTickersResults.length>0? renderedTickers: <p>No results found!</p>}
-      {isFetchingNextPage && <div>Loading more...</div>}
+      {isFetchingNextPage && <Loading/>}
     </div>
   );
 };
