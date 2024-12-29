@@ -4,6 +4,11 @@ import { setSearchTickersResult } from "@store/searchTickers/searchTickersSlice"
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { fetchTickers } from "utils";
+import {
+  MAX_NUMBER_OF_RESPONSES_PER_SEARCH_TEXT,
+  MAX_NUMBER_OF_SEARCH_RESPONSES,
+  QUERY_STALE_TIME,
+} from "utils/consts";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const MaxLimit = 10;
@@ -18,14 +23,26 @@ const useTickersSearchResults = () => {
       `https://api.polygon.io/v3/reference/tickers?search=${searchTextFromTheStore}&active=true&limit=10&apiKey=${apiKey}`,
     [searchTextFromTheStore]
   );
-  // const initialUrl = `https://api.polygon.io/v3/reference/tickers?search=${searchTextFromTheStore}&active=true&limit=10&apiKey=${apiKey}`;
   const searchTickersResultsFromTheStore = useAppSelector(
     (state) => state.searchTickers.responses
   );
 
+  const historySearch = useAppSelector(
+    (state) => state.searchTickers.historySearch
+  );
+
   const setTickersInTheStore = (response: any, pageParam: string) => {
-    // cashing only the first 100 ticker (10 respones)
-    if (searchTickersResultsFromTheStore.length < 11) {
+    // cashing 10 keywords, each one with max 5 api-requests
+    // = 10 * 5 = 50 requests
+    // 50 requests, each one has 10 tickers
+    // = 50 * 10 = 500 tickers to be cashed as max
+    if (
+      searchTickersResultsFromTheStore.length <=
+        MAX_NUMBER_OF_SEARCH_RESPONSES &&
+      historySearch[searchTextFromTheStore] <=
+        MAX_NUMBER_OF_RESPONSES_PER_SEARCH_TEXT
+    ) {
+      console.log("Cashing new request .....");
       dispatch(setSearchTickersResult({ response, searchText: pageParam }));
     }
   };
@@ -37,7 +54,7 @@ const useTickersSearchResults = () => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: QUERY_STALE_TIME,
     initialPageParam: initialUrl,
     queryKey: ["searchtickers", initialUrl],
     queryFn: ({ pageParam = initialUrl }) => {
