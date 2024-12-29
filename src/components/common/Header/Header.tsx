@@ -11,7 +11,7 @@ function Header() {
       <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
         <Container className="d-flex">
           <Nav className="">
-            <Nav.Link as={NavLink} to="/">
+            <Nav.Link as={NavLink} to="/stock-market-app">
               Home
             </Nav.Link>
           </Nav>
