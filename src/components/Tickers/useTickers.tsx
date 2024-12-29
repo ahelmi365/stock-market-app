@@ -2,8 +2,8 @@ import useScrollTickers from "@hooks/useScrollTcikers";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { setTickers } from "@store/tickers/tickersSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import getTickers from "api/getTickers";
-import { fetchTickers, storeHasTicker } from "utils";
+import { fetchTickers } from "utils";
+import { QUERY_STALE_TIME } from "utils/consts";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const MaxLimit = 10;
@@ -30,7 +30,7 @@ const useTickers = () => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: QUERY_STALE_TIME,
     initialPageParam: initialUrl,
     queryKey: ["tickers", initialUrl],
     // queryFn: fetchTickers,
