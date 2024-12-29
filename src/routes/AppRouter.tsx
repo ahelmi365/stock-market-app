@@ -26,6 +26,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/*",
+    element: <Error />,
+  },
 ]);
 
 const AppRouter = () => {

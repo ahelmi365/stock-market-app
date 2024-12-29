@@ -19,7 +19,7 @@ const Error = () => {
       <h1>{errorStatus}</h1>
       <p>{errorStatusText}</p>
 
-      <Link to="/" replace={true}>
+      <Link to="/stock-market-app/" replace={true}>
         Go Home 🏠
       </Link>
     </Container>
