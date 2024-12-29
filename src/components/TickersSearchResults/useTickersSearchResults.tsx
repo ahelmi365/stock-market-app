@@ -32,11 +32,10 @@ const useTickersSearchResults = () => {
   );
 
   const setTickersInTheStore = (response: any, pageParam: string) => {
-    // cashing 10 keywords, each one with max 5 api-requests
-    // = 10 * 5 = 50 requests
-    // 50 requests, each one has 10 tickers
+    // cashing keywords, each one with max 5 api-requests
+    // 5 * 10 = 50 tickers max
+    // 50 requests, each one has 10 tickers max
     // = 50 * 10 = 500 tickers to be cashed as max
-    console.log(historySearch[searchTextFromTheStore])
     if (
       searchTickersResultsFromTheStore.length <=
         MAX_NUMBER_OF_SEARCH_RESPONSES &&
