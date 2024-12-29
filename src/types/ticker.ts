@@ -24,3 +24,8 @@ export interface IQueryParams {
   tickersFromTheStore: { [key: string]: ITickersResponse }[];
   setTickersInTheStore: (response: ITickersResponse, pageParam: string) => void;
 }
+
+
+export interface IHistorySearch {
+  [key: string]: number;
+}
