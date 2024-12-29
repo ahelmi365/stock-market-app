@@ -28,7 +28,7 @@ const searchTickersPersistConfig = {
 };
 
 // Combine reducers with persist configurations
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   tickers: persistReducer(tickersPersistConfig, tickersSlice),
   searchTickers: persistReducer(searchTickersPersistConfig, searchTickersSlice),
 });
