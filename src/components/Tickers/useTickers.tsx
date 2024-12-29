@@ -3,7 +3,10 @@ import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { setTickers } from "@store/tickers/tickersSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchTickers } from "utils";
-import { QUERY_STALE_TIME } from "utils/consts";
+import {
+  MAX_NUMBER_OF_HOME_PAGE_RESPONSES,
+  QUERY_STALE_TIME,
+} from "utils/consts";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const MaxLimit = 10;
@@ -17,7 +20,7 @@ const useTickers = () => {
 
   const setTickersInTheStore = (response: any, pageParam: string) => {
     // cashing only the first 100 ticker (10 respones)
-    if (tickersFromTheStore.length < 11) {
+    if (tickersFromTheStore.length <= MAX_NUMBER_OF_HOME_PAGE_RESPONSES) {
       dispatch(setTickers({ response, requestUrl: pageParam }));
     }
   };
