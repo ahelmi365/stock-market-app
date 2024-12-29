@@ -3,7 +3,7 @@ import { ITickersResponse } from "@customTypes/ticker";
 const getTickers = async (url: string): Promise<ITickersResponse> => {
   let delay = 10000; // 10 seconds
   let response = null;
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i <= 5; i++) {
     console.log("call api for number:", i + 1);
     response = await fetch(url);
 
