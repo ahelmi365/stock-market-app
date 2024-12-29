@@ -18,3 +18,9 @@ export interface ITickersResponse {
   next_url: string;
   request_id: string;
 }
+
+export interface IQueryParams {
+  pageParam: string;
+  tickersFromTheStore: { [key: string]: ITickersResponse }[];
+  setTickersInTheStore: (response: ITickersResponse, pageParam: string) => void;
+}
