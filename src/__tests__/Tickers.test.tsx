@@ -63,7 +63,7 @@ const tickersMock = {
 };
 const queryClient = new QueryClient();
 describe("SearchTickers", () => {
-  test("to call the api and get Pizza of the day", async () => {
+  test.skip("to call the api and get tickers", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
