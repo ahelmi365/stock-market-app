@@ -27,6 +27,10 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/stock-market-app/*",
+    element: <Error />,
+  },
+  {
     path: "/*",
     element: <Error />,
   },
