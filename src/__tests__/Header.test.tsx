@@ -26,5 +26,5 @@ test("just a test", () => {
   const homeLink = screen.getByRole("link", { name: /home/i });
   expect(homeLink.innerText).toContain("Home");
   expect(homeLink.hasAttribute("href"));
-  expect(homeLink.getAttribute("href")).toBe("/");
+  expect(homeLink.getAttribute("href")).toBe("/stock-market-app");
 });
