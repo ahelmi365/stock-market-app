@@ -1,3 +1,5 @@
+import { ITickersResponse } from "@customTypes/ticker";
+
 // Custom debounce function
 export function debounce<T extends (...args: string[]) => void>(
   func: T,
@@ -20,4 +22,16 @@ export const sliceLongText = (text: string) => {
     return slicedText + "...";
   }
   return text;
+};
+
+export const storeHasTicker = (
+  requestId: string,
+  tickerRespose: { [key: string]: ITickersResponse }[]
+) => {
+  const results = tickerRespose?.map((ticker) => {
+    if (ticker[requestId]) {
+      return true;
+    }
+  });
+  return results.some((result) => result === true);
 };
