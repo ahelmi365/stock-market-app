@@ -5,7 +5,7 @@ import { debounce } from "utils";
 
 const useSearchTickers = () => {
   const searchTextFromStore = useAppSelector(
-    (state) => state.searchTickers.searchText
+    (state) => state.searchTickers?.searchText
   );
   const [query, setQuery] = useState(searchTextFromStore || "");
   const dispatch = useAppDispatch();
