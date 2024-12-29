@@ -7,7 +7,7 @@ const useScrollTickers = (
 ) => {
   const loadMoreTickers = () => {
     if (hasNextPage && !isFetchingNextPage) {
-      // console.log("Fetching next page");
+      console.log("Fetching next page");
       fetchNextPage();
     }
   };
@@ -18,7 +18,6 @@ const useScrollTickers = (
         window.innerHeight + window.scrollY >=
           document.documentElement.scrollHeight - 20
       ) {
-        console.log("Bottom of the page reached");
         loadMoreTickers();
       }
     };

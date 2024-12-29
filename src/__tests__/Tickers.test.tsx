@@ -85,6 +85,5 @@ describe("SearchTickers", () => {
       },
       { timeout: 4000 }
     );
-    console.log("result.current is: ", result.current);
   });
 });

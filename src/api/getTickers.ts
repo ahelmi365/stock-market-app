@@ -4,11 +4,11 @@ const getTickers = async (url: string): Promise<ITickersResponse> => {
   let delay = 10000; // 10 seconds
   let response = null;
   for (let i = 0; i <= 5; i++) {
-    console.log("call api for number:", i + 1);
     response = await fetch(url);
-
+    
     if (response.status === 429) {
-      console.log("Excced rate limits");
+      console.log("Exceeded rate limits");
+      console.log("retry calling api number:", i + 1);
       await new Promise((resolve) => setTimeout(resolve, delay));
     } else {
       return response.json(); // Successful response
