@@ -44,14 +44,14 @@ export const fetchTickers = async ({
 }: IQueryParams) => {
   // check if there is a response in the store with this url or not
   if (storeHasTicker(pageParam, tickersFromTheStore)) {
-    console.log("Store already has this ticker");
+    console.log("Store already has this response");
     const targetResponse = tickersFromTheStore.filter(
       (response) => response[pageParam] != undefined
     );
     return targetResponse[0][pageParam];
   } else {
     // call api to get new response
-    console.log("get new ticker and add it to the store");
+    console.log("Get new ticker and add it to the store");
     const response = await getTickers(pageParam);
     setTickersInTheStore(response, pageParam);
     return response;
