@@ -3,6 +3,7 @@ import { setSearchTickersResult } from "@store/searchTickers/searchTickersSlice"
 import { useInfiniteQuery } from "@tanstack/react-query";
 import getTickers from "api/getTickers";
 import { useEffect, useMemo } from "react";
+import { storeHasTicker } from "utils";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const MaxLimit = 10;
@@ -22,18 +23,10 @@ const useTickersSearchResults = () => {
     (state) => state.searchTickers.responses
   );
 
-  const storeHasTicker = (requestId: string) => {
-    const results = searchTickersResultsFromTheStore.map((ticker) => {
-      if (ticker[requestId]) {
-        return true;
-      }
-    });
-    return results.some((result) => result === true);
-  };
   const fetchTickers = async ({ pageParam = initialUrl }) => {
     if (!pageParam || !searchTextFromTheStore) return;
     // check if there is a response in the store with this url or not
-    if (storeHasTicker(pageParam)) {
+    if (storeHasTicker(pageParam, searchTickersResultsFromTheStore)) {
       console.log("Store already has this ticker");
       const targetResponse = searchTickersResultsFromTheStore.filter(
         (response) => response[pageParam] != undefined
