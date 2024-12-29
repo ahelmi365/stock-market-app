@@ -1,3 +1,4 @@
+import useScrollTickers from "@hooks/useScrollTcikers";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { setSearchTickersResult } from "@store/searchTickers/searchTickersSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -68,33 +69,7 @@ const useTickersSearchResults = () => {
         : undefined,
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        hasNextPage &&
-        window.innerHeight + window.scrollY >=
-          document.documentElement.scrollHeight - 20
-      ) {
-        // console.log("Bottom of the page reached");
-        loadMoreTickers();
-      }
-    };
-
-    // load more tickers if content height is less than or equal to viewport height
-    const checkContentHeight = () => {
-      if (
-        hasNextPage &&
-        document.documentElement.scrollHeight <= window.innerHeight
-      ) {
-        loadMoreTickers();
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    checkContentHeight();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  useScrollTickers(hasNextPage, isFetchingNextPage, fetchNextPage);
 
   return {
     searchTickersResults: data?.pages.flatMap((page) => page?.results) || [],
