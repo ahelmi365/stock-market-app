@@ -4,6 +4,7 @@ import Error from "@pages/Error/Error";
 import Home from "@pages/Home/Home";
 
 const router = createBrowserRouter([
+  { path: "/stock-market-app", element: <MainLayout /> },
   {
     path: "/",
     element: <MainLayout />,
