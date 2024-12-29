@@ -1,9 +1,8 @@
 import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
 
-import styles from "./styles.module.css";
 import SearchTickers from "@components/SearchTickers/SearchTickers";
 
 function Header() {
