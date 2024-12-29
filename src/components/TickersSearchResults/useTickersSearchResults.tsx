@@ -36,10 +36,11 @@ const useTickersSearchResults = () => {
     // = 10 * 5 = 50 requests
     // 50 requests, each one has 10 tickers
     // = 50 * 10 = 500 tickers to be cashed as max
+    console.log(historySearch[searchTextFromTheStore])
     if (
       searchTickersResultsFromTheStore.length <=
         MAX_NUMBER_OF_SEARCH_RESPONSES &&
-      historySearch[searchTextFromTheStore] <=
+      historySearch[searchTextFromTheStore] <
         MAX_NUMBER_OF_RESPONSES_PER_SEARCH_TEXT
     ) {
       console.log("Cashing new request .....");
