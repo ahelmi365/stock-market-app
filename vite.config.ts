@@ -12,5 +12,5 @@ export default defineConfig({
       environment: 'happy-dom',
     },
   }),
-  base:"/tock-market-app"
+  base:"/stock-market-app"
 });
