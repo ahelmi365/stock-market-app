@@ -10,8 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
@@ -23,7 +23,6 @@
     "@reduxjs/toolkit": "^2.5.0",
     "@tanstack/react-query": "^5.62.10",
     "@testing-library/user-event": "^14.5.2",
-    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.7",
