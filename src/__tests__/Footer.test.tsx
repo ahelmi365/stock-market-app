@@ -1,9 +1,7 @@
 import { Footer } from "@components/common";
-import { render, cleanup } from "@testing-library/react";
-import { expect, test, vi, describe, beforeAll } from "vitest";
-import createFetchMock from "vitest-fetch-mock";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { afterEach, beforeEach } from "node:test";
+import { cleanup, render } from "@testing-library/react";
+import { afterEach } from "node:test";
+import { expect, test } from "vitest";
 
 afterEach(cleanup);
 

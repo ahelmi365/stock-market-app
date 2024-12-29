@@ -1,23 +1,21 @@
-import { cleanup, renderHook, waitFor, render } from "@testing-library/react";
+import useTickers from "@components/Tickers/useTickers";
+import * as hooks from "@store/hooks";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { cleanup, render, renderHook, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import configureMockStore from "redux-mock-store";
 import {
-  expect,
-  test,
-  describe,
-  afterEach,
-  beforeEach,
-  vi,
-  vitest,
+    afterEach,
+    beforeEach,
+    describe,
+    expect,
+    test,
+    vi,
+    vitest,
 } from "vitest";
-import Tickers from "./../components/Tickers/Tickers";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import createfetchMock from "vitest-fetch-mock";
-import useTickers from "@components/Tickers/useTickers";
-import getTickers from "api/getTickers";
-import * as hooks from "@store/hooks";
-import { useAppSelector } from "@store/hooks";
+import Tickers from "./../components/Tickers/Tickers";
 
 const mockStore = configureMockStore();
 const store = mockStore({

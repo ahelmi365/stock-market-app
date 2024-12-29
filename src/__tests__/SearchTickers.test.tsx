@@ -1,9 +1,9 @@
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+import SearchTickers from "@components/SearchTickers/SearchTickers";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import configureMockStore from "redux-mock-store";
-import { expect, test, describe, afterEach } from "vitest";
-import SearchTickers from "@components/SearchTickers/SearchTickers";
+import { afterEach, describe, expect, test } from "vitest";
 
 const mockStore = configureMockStore();
 const store = mockStore({
@@ -24,7 +24,7 @@ describe("SearchTickers", () => {
       </Provider>
     );
 
-    const searchInputElm = screen.getByPlaceholderText("Search");
+    screen.getByPlaceholderText("Search");
     // expect(searchInputElm).toBeInTheDocument();
   });
 

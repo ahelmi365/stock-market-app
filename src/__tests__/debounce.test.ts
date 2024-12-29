@@ -1,5 +1,5 @@
-import { debounce, sliceLongText } from "utils";
-import { expect, describe, test, vi, beforeEach, afterEach } from "vitest";
+import { debounce } from "utils";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 describe('debounce', () => {
   beforeEach(() => {
